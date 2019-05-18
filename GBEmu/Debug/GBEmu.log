@@ -1,0 +1,25 @@
+﻿  pch.cpp
+  CPU.cpp
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.h(26): error C2061: syntax error: identifier 'opcode'
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(684): error C2196: case value '211' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(708): error C2196: case value '219' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(714): error C2196: case value '221' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(732): error C2196: case value '227' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(735): error C2196: case value '228' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(756): error C2196: case value '235' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(759): error C2196: case value '236' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(762): error C2196: case value '237' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(783): error C2196: case value '244' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(798): error C2196: case value '9' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(801): error C2196: case value '42' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(804): error C2196: case value '43' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(807): error C2196: case value '44' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(810): error C2196: case value '45' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(813): error C2196: case value '46' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(816): error C2196: case value '47' already used
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(837): error C2061: syntax error: identifier 'opcode'
+c:\users\dgray\source\repos\gbemu\gbemu\cpu.cpp(839): error C2513: 'int': no variable declared before '='
+  main.cpp
+  MMU.cpp
+  Generating Code...
+c:\users\dgray\source\repos\gbemu\gbemu\mmu.cpp(18): error C4716: 'MMU::readByte': must return a value
