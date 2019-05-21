@@ -1,4 +1,6 @@
 #pragma once
+#include <bitset>
+
 class CPU
 {
 public:
@@ -12,7 +14,7 @@ public:
 
 private:
 	unsigned short stack[16];
-	unsigned short flags[8]; 
+	std::bitset<8> flags; 
 	unsigned short A, B, C, D, E, F, H, L, SP, PC, BC, DE, HL;
 
 	unsigned short opcode;
@@ -51,6 +53,16 @@ private:
 	void POP_NN(short r);
 
 	//8-bit ALU
+	void ADD_A_N(short n);
+	void ADC_A_N(short n);
+	void SUB_N(short n);
+	void SBC_A_N(short n);
+	void AND_N(short n);
+	void OR_N(short n);
+	void XOR_N(short n);
+	void CP_N(short n);
+	void INC_N(short n);
+	void DEC_N(short n);
 
 };
 

@@ -16,7 +16,10 @@ CPU::~CPU()
 void CPU::init()
 {
 	PC = 0x0100; 
-	SP = 0xFFFE; 
+	SP = 0xFFFE;
+
+	for (int i = 0; i < 8; i++)
+		flags[i] = 0; 
 }
 
 void CPU::decode()
@@ -454,7 +457,7 @@ void CPU::decode()
 			LD_NN_N(H, opcode >> 8);
 			break;
 		case 0x87:
-
+			ADD_A_N(A); 
 			break;
 		case 0x88:
 
@@ -681,9 +684,6 @@ void CPU::decode()
 		case 0xD2:
 
 			break;
-		case 0xD3:
-
-			break;
 		case 0xD4:
 
 			break;
@@ -705,13 +705,7 @@ void CPU::decode()
 		case 0xDA:
 
 			break;
-		case 0xDB:
-
-			break;
 		case 0xDC:
-
-			break;
-		case 0xDD:
 
 			break;
 		case 0xDE:
@@ -727,12 +721,6 @@ void CPU::decode()
 
 			break;
 		case 0xE2:
-
-			break;
-		case 0xE3:
-
-			break;
-		case 0xE4:
 
 			break;
 		case 0xE5:
@@ -801,6 +789,9 @@ void CPU::decode()
 	}
 }
 
+void 
+
+#pragma region 8 bit loads
 void CPU::LD_NN_N(short r, short n)
 {
 	r = n; 
@@ -816,10 +807,117 @@ void CPU::LD_A_N(short n, short opcode)
 	A = n; 
 }
 
-void CPU::LD_N_A(short register, opcode)
+void CPU::LD_N_A(short r, opcode)
 {
-	register  = A; 
+	r = A; 
 }
+
+void CPU::LD_A_C()
+{
+	
+}
+
+void CPU::LD_C_A()
+{
+	
+}
+
+void CPU::LDD_A_HL()
+{
+	
+}
+#pragma  endregion 
+
+#pragma region 8-bit ALU
+void CPU::ADD_A_N(short n)
+{
+	A += n;
+
+	if (A == 0)
+		flags[7] = 1;
+
+	flags[6] = 0; 
+
+}
+
+void CPU::ADC_A_N(short n)
+{
+	A += n;
+
+	A += flags[4]; 
+}
+
+void CPU::SUB_N(short n)
+{
+	A -= n;
+
+	if (A == 0)
+		flags[7] = 1;
+
+	flags[6] = 0; 
+}
+
+void CPU::SBC_A_N(short n)
+{
+	A -= n;
+
+	A -= flags[4];
+}
+
+void CPU::AND_N(short n)
+{
+	A &= n;
+
+	if (A == 0)
+		flags[7] = 1;
+	flags[6] = 0;
+	flags[5] = 1;
+	flags[4] = 0;
+}
+
+void CPU::OR_N(short n)
+{
+	A |= n;
+
+	if (A == 0)
+		flags[7] = 1;
+	flags[6] = 0;
+	flags[5] = 0;
+	flags[4] = 0;
+}
+
+void CPU::XOR_N(short n)
+{
+	A ^= n;
+
+	if (A == 0)
+		flags[7] = 1;
+	flags[6] = 0;
+	flags[5] = 0;
+	flags[4] = 0;
+}
+
+void CPU::CP_N(short n)
+{
+	short result = A - n;
+
+	if (result == 0)
+		flags[7] = 1;
+
+	flags[6] = 1;
+
+	// TODO
+	flags[5] = 1;
+	flags[4] = 1;
+}
+
+
+
+
+
+#pragma endregion 
+
+
 
 
 
