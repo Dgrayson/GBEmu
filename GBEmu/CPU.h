@@ -1,4 +1,5 @@
 #pragma once
+
 #include <bitset>
 
 class CPU
@@ -6,6 +7,8 @@ class CPU
 public:
 	CPU();
 	~CPU();
+
+	MMU mmu; 
 
 	void decode();
 	void execute();
@@ -16,10 +19,13 @@ private:
 	unsigned short stack[16];
 	std::bitset<8> flags; 
 	unsigned short A, B, C, D, E, F, H, L, SP, PC, BC, DE, HL;
+	float clock; 
 
 	unsigned short opcode;
 
 	int clock;
+
+	void setFlags(short Z, short N, short H, short C); 
 
 	// 8bit loads
 	void LD_NN_N(short r, short n); 
@@ -102,10 +108,10 @@ private:
 
 	//Jumps
 	void JP_NN(short nn);
-	void JP_CC_NN(short nn, short cc);
+	void JP_CC_NN(char* cc, short nn);
 	void JP_HL();
-	void JR_N();
-	void JR_CC_N();
+	void JR_N(short n);
+	void JR_CC_N(short n);
 
 	// Calls
 	void CALL_NN();

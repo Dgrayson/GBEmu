@@ -20,6 +20,8 @@ void CPU::init()
 
 	for (int i = 0; i < 8; i++)
 		flags[i] = 0; 
+
+	clock = 0; 
 }
 
 void CPU::decode()
@@ -789,7 +791,12 @@ void CPU::decode()
 	}
 }
 
-void 
+void CPU::setFlags(short Z, short N, short H, short C) {
+	flags[7] = Z; 
+	flags[6] = N; 
+	flags[5] = H; 
+	flags[4] = C; 
+}
 
 #pragma region 8 bit loads
 void CPU::LD_NN_N(short r, short n)
@@ -942,6 +949,81 @@ void CPU::DEC_N(short n)
 
 
 #pragma endregion 
+
+#pragma region 16 bit arithmatic
+
+void ADD_HL_N(short n) {
+	HL += n; 
+
+}
+#pragma endregion
+
+
+#pragma region Jumps
+	
+void CPU::JP_NN(short nn) {
+	PC = nn; 
+
+}
+
+void CPU::JP_CC_NN(char* cc, short nn) {
+
+	if (cc == "NZ") {
+		if (flags[7] == 0)
+			PC = nn; 
+	}
+	else if (cc == "Z") {
+		if (flags[7] == 1)
+			PC = nn; 
+	}
+	else if (cc == "NC") {
+		if (flags[4] == 0)
+			PC = nn; 
+	}
+	else {
+		if (flags[4] == 1)
+			PC = nn; 
+	}
+}
+
+void CPU::JP_HL() {
+	PC = HL; 
+}
+
+void CPU::JR_N(short n) {
+	PC += n; 
+}
+
+void CPU::JR_CC_N(short n) {
+	if (cc == "NZ") {
+		if (flags[7] == 0)
+			PC += n;
+	}
+	else if (cc == "Z") {
+		if (flags[7] == 1)
+			PC += n;
+	}
+	else if (cc == "NC") {
+		if (flags[4] == 0)
+			PC += n;
+	}
+	else {
+		if (flags[4] == 1)
+			PC += n;
+	}
+
+
+}
+	
+#pragma endregion
+
+#pragma region Returns
+
+void CPU::RET() {
+
+}
+#pragma endregion
+
 
 
 
