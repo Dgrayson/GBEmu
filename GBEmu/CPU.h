@@ -64,6 +64,62 @@ private:
 	void INC_N(short n);
 	void DEC_N(short n);
 
+	//16-bit alu
+	void ADD_HL_N(short n);
+	void ADD_SP_N(short n);
+	void INC_NN(short nn);
+	void DEC_NN(short nn);
+
+	//MISC
+	void SWAP_N(short n);
+	void DAA();
+	void CPL();
+	void CCF();
+	void SCF();
+	void NOP();
+	void HALT();
+	void STOP();
+	void DI();
+	void EL();
+
+	//Rotates and shifts
+	void RLCA();
+	void RLA();
+	void RRCA();
+	void RRA();
+	void RLC();
+	void RL_N();
+	void RRC_N();
+	void RR_N();
+	void SLA_N();
+	void SRA_N();
+	void SRL_N();
+
+	//Bit Opcodes
+	void BIT_B_R(short b, short r);
+	void SET_B_R(short b, short r);
+	void RES_B_R(short b, short r);
+
+	//Jumps
+	void JP_NN(short nn);
+	void JP_CC_NN(short nn, short cc);
+	void JP_HL();
+	void JR_N();
+	void JR_CC_N();
+
+	// Calls
+	void CALL_NN();
+	void CALL_CC_NN();
+
+	// Restarts
+	void RST_N(short N);
+
+	// REturns
+	void RET();
+	void RET_CC();
+	void RETI();
+
+
 };
 
 

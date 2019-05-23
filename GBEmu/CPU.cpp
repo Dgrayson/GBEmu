@@ -436,16 +436,16 @@ void CPU::decode()
 
 			break;
 		case 0x80:
-
+			ADD_A_N(B);
 			break;
 		case 0x81:
-
+			ADD_A_N(C);
 			break;
 		case 0x82:
-
+			ADD_A_N(D);
 			break;
 		case 0x83:
-
+			ADD_A_N(A);
 			break;
 		case 0x84:
 
@@ -909,6 +909,32 @@ void CPU::CP_N(short n)
 	// TODO
 	flags[5] = 1;
 	flags[4] = 1;
+}
+
+void CPU::INC_N(short n)
+{
+	n++;
+
+	if (n == 0)
+		flags[7] = 1;
+
+	flags[6] = 0;
+
+	//
+	flags[5] = 1; 
+}
+
+void CPU::DEC_N(short n)
+{
+	n--;
+
+	if (n == 0)
+		flags[7] = 1;
+
+	flags[6] = 0;
+
+	//
+	flags[5] = 1;
 }
 
 
