@@ -3,8 +3,11 @@
 #include <iostream>
 
 
+MMU gb_mmu; 
+
 CPU::CPU()
 {
+	init(); 
 }
 
 
@@ -15,17 +18,31 @@ CPU::~CPU()
 
 void CPU::init()
 {
-	PC = 0x0100; 
+
+	A = 0;
+	B = 0;
+	C = 0;
+	D = 0;
+	F = 0;
+	H = 0;
+	L = 0;
+
+	PC = 0x0100;
 	SP = 0xFFFE;
+	BC = 0;
+	DE = 0;
+	HL = 0;
 
 	for (int i = 0; i < 8; i++)
 		flags[i] = 0; 
 
-	clock = 0; 
+	gb_mmu = MMU(); 
 }
 
 void CPU::decode()
 {
+	opcode = gb_mmu.readByte(PC);
+
 	switch(opcode)
 	{
 		case 0xD3:
@@ -46,12 +63,12 @@ void CPU::decode()
 		#pragma region 0x00 - 0x0F
 		case 0x00:
 			// NOP
-
+			NOP(); 
 			PC++;
 			// TODO: increase cycles
 			break;
 		case 0x01:
-
+			LD
 			
 			break;
 		case 0x02:
@@ -67,7 +84,7 @@ void CPU::decode()
 
 			break;
 		case 0x06:
-			LD_NN_N(B, opcode >> 8); 
+			LD_NN_N(&B, opcode >> 8); 
 			break;
 		case 0x07:
 
@@ -91,7 +108,7 @@ void CPU::decode()
 
 			break;
 		case 0x0E:
-			LD_NN_N(C, opcode >> 8); 
+			LD_NN_N(&C, opcode >> 8); 
 			break;
 		case 0x0F:
 
@@ -117,7 +134,7 @@ void CPU::decode()
 
 			break;
 		case 0x16:
-			LD_NN_N(D, opcode >> 8);
+			LD_NN_N(&D, opcode >> 8);
 			break;
 		case 0x17:
 
@@ -141,7 +158,7 @@ void CPU::decode()
 
 			break;
 		case 0x1E:
-			LD_NN_N(E, opcode >> 8);
+			LD_NN_N(&E, opcode >> 8);
 			break;
 		case 0x1F:
 
@@ -167,7 +184,7 @@ void CPU::decode()
 
 			break;
 		case 0x26:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x27:
 
@@ -191,7 +208,7 @@ void CPU::decode()
 
 			break;
 		case 0x2E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x2F:
 
@@ -216,7 +233,7 @@ void CPU::decode()
 
 			break;
 		case 0x36:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x37:
 
@@ -240,7 +257,7 @@ void CPU::decode()
 
 			break;
 		case 0x3E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x3F:
 
@@ -264,7 +281,7 @@ void CPU::decode()
 
 			break;
 		case 0x46:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x47:
 
@@ -288,7 +305,7 @@ void CPU::decode()
 
 			break;
 		case 0x4E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x4F:
 
@@ -312,7 +329,7 @@ void CPU::decode()
 
 			break;
 		case 0x56:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x57:
 
@@ -336,7 +353,7 @@ void CPU::decode()
 
 			break;
 		case 0x5E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x5F:
 
@@ -360,7 +377,7 @@ void CPU::decode()
 
 			break;
 		case 0x66:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x67:
 
@@ -384,7 +401,7 @@ void CPU::decode()
 
 			break;
 		case 0x6E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x6F:
 
@@ -408,7 +425,7 @@ void CPU::decode()
 
 			break;
 		case 0x76:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x77:
 
@@ -432,7 +449,7 @@ void CPU::decode()
 
 			break;
 		case 0x7E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x7F:
 
@@ -447,7 +464,7 @@ void CPU::decode()
 			ADD_A_N(D);
 			break;
 		case 0x83:
-			ADD_A_N(A);
+			ADD_A_N(*A);
 			break;
 		case 0x84:
 
@@ -456,10 +473,10 @@ void CPU::decode()
 
 			break;
 		case 0x86:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x87:
-			ADD_A_N(A); 
+			ADD_A_N(*A);
 			break;
 		case 0x88:
 
@@ -480,7 +497,7 @@ void CPU::decode()
 
 			break;
 		case 0x8E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x8F:
 
@@ -504,7 +521,7 @@ void CPU::decode()
 
 			break;
 		case 0x96:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0x97:
 			
@@ -528,7 +545,7 @@ void CPU::decode()
 
 			break;
 		case 0x9E:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0x9F:
 
@@ -552,7 +569,7 @@ void CPU::decode()
 
 			break;
 		case 0xA6:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0xA7:
 
@@ -576,7 +593,7 @@ void CPU::decode()
 
 			break;
 		case 0xAE:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0xAF:
 
@@ -600,7 +617,7 @@ void CPU::decode()
 
 			break;
 		case 0xB6:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0xB7:
 
@@ -624,7 +641,7 @@ void CPU::decode()
 
 			break;
 		case 0xBE:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0xBF:
 
@@ -648,7 +665,7 @@ void CPU::decode()
 
 			break;
 		case 0xC6:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0xC7:
 
@@ -672,7 +689,7 @@ void CPU::decode()
 
 			break;
 		case 0xCE:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0xCF:
 
@@ -693,7 +710,7 @@ void CPU::decode()
 
 			break;
 		case 0xD6:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0xD7:
 
@@ -711,7 +728,7 @@ void CPU::decode()
 
 			break;
 		case 0xDE:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0xDF:
 
@@ -729,7 +746,7 @@ void CPU::decode()
 
 			break;
 		case 0xE6:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0xE7:
 
@@ -744,7 +761,7 @@ void CPU::decode()
 
 			break;
 		case 0xEE:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0xEF:
 
@@ -765,7 +782,7 @@ void CPU::decode()
 
 			break;
 		case 0xF6:
-			LD_NN_N(H, opcode >> 8);
+			LD_NN_N(&H, opcode >> 8);
 			break;
 		case 0xF7:
 
@@ -783,7 +800,7 @@ void CPU::decode()
 
 			break;
 		case 0xFE:
-			LD_NN_N(L, opcode >> 8);
+			LD_NN_N(&L, opcode >> 8);
 			break;
 		case 0xFF:
 
@@ -799,24 +816,24 @@ void CPU::setFlags(short Z, short N, short H, short C) {
 }
 
 #pragma region 8 bit loads
-void CPU::LD_NN_N(short r, short n)
+void CPU::LD_NN_N(short *r, short n)
 {
-	r = n; 
+	*r = n; 
 }
 
-void CPU::LD_R1_R2(short r1, short r2, short opcode)
+void CPU::LD_R1_R2(short *r1, short r2, short opcode)
 {
-	r1 = r2; 
+	*r1 = r2; 
 }
 
-void CPU::LD_A_N(short n, short opcode)
+void CPU::LD_A_N(short *n, short opcode)
 {
 	A = n; 
 }
 
-void CPU::LD_N_A(short r, opcode)
+void CPU::LD_N_A(short *r)
 {
-	r = A; 
+	*r = *A; 
 }
 
 void CPU::LD_A_C()
@@ -873,7 +890,7 @@ void CPU::SBC_A_N(short n)
 
 void CPU::AND_N(short n)
 {
-	A &= n;
+	*A &= n;
 
 	if (A == 0)
 		flags[7] = 1;
@@ -884,7 +901,7 @@ void CPU::AND_N(short n)
 
 void CPU::OR_N(short n)
 {
-	A |= n;
+	*A |= n;
 
 	if (A == 0)
 		flags[7] = 1;
@@ -895,7 +912,7 @@ void CPU::OR_N(short n)
 
 void CPU::XOR_N(short n)
 {
-	A ^= n;
+	*A ^= n;
 
 	if (A == 0)
 		flags[7] = 1;
@@ -906,7 +923,7 @@ void CPU::XOR_N(short n)
 
 void CPU::CP_N(short n)
 {
-	short result = A - n;
+	short result = *A - n;
 
 	if (result == 0)
 		flags[7] = 1;
@@ -953,10 +970,35 @@ void CPU::DEC_N(short n)
 #pragma region 16 bit arithmatic
 
 void ADD_HL_N(short n) {
-	HL += n; 
-
 }
+
+void CPU::ADD_SP_N(short n)
+{
+	SP += n; 
+}
+
+void CPU::INC_NN(short nn)
+{
+	nn++; 
+}
+
+void CPU::DEC_NN(short nn)
+{
+	nn--; 
+}
+
+
+
 #pragma endregion
+
+#pragma region Misc
+
+short CPU::SWAP_N(short n)
+{
+	return ((n & 0x0F) << 4 | (n & 0xF0) >> 4); 
+}
+
+#pragma endregion 
 
 
 #pragma region Jumps
@@ -994,7 +1036,7 @@ void CPU::JR_N(short n) {
 	PC += n; 
 }
 
-void CPU::JR_CC_N(short n) {
+void CPU::JR_CC_N(char* cc, short n) {
 	if (cc == "NZ") {
 		if (flags[7] == 0)
 			PC += n;

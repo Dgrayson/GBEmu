@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bitset>
+#include "MMU.h"
 
 class CPU
 {
@@ -8,7 +9,8 @@ public:
 	CPU();
 	~CPU();
 
-	MMU mmu; 
+	MMU mmu;
+	short* A, B, C, D, E, F, H, L, SP, PC, BC, DE, HL;
 
 	void decode();
 	void execute();
@@ -18,20 +20,17 @@ public:
 private:
 	unsigned short stack[16];
 	std::bitset<8> flags; 
-	unsigned short A, B, C, D, E, F, H, L, SP, PC, BC, DE, HL;
-	float clock; 
+
 
 	unsigned short opcode;
-
-	int clock;
 
 	void setFlags(short Z, short N, short H, short C); 
 
 	// 8bit loads
-	void LD_NN_N(short r, short n); 
-	void LD_R1_R2(short r1, short r2, short opcode);
-	void LD_A_N(short n, short opcode);
-	void LD_N_A(short r, opcode);
+	void LD_NN_N(short *r, short n); 
+	void LD_R1_R2(short *r1, short r2, short opcode);
+	void LD_A_N(short *n, short opcode);
+	void LD_N_A(short *r);
 	void LD_A_C();
 	void LD_C_A();
 	void LD_A_HLD();
@@ -77,7 +76,7 @@ private:
 	void DEC_NN(short nn);
 
 	//MISC
-	void SWAP_N(short n);
+	short SWAP_N(short n);
 	void DAA();
 	void CPL();
 	void CCF();
@@ -111,7 +110,7 @@ private:
 	void JP_CC_NN(char* cc, short nn);
 	void JP_HL();
 	void JR_N(short n);
-	void JR_CC_N(short n);
+	void JR_CC_N(char* cc, short n);
 
 	// Calls
 	void CALL_NN();

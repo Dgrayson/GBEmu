@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <iostream>
 #include <SDL.h>
+#include "CPU.h"
 #define fps 60
 
 int main()
@@ -26,6 +27,9 @@ int main()
 
 	Uint32 start_tick;
 	SDL_Event event;
+
+	CPU gb_cpu = new CPU();
+
 	bool running = true;
 
 	while(running)
