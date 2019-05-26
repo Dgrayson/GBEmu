@@ -68,7 +68,7 @@ void CPU::decode()
 			// TODO: increase cycles
 			break;
 		case 0x01:
-			LD
+			
 			
 			break;
 		case 0x02:
@@ -164,7 +164,7 @@ void CPU::decode()
 
 			break;
 		#pragma endregion 
-		#pragma region 
+		#pragma region 0x20 - 0x2F
 		case 0x20:
 
 			break;
@@ -214,6 +214,7 @@ void CPU::decode()
 
 			break;
 		#pragma endregion 
+		#pragma region 0x30 - 0x3F
 		case 0x30:
 
 			break;
@@ -262,102 +263,107 @@ void CPU::decode()
 		case 0x3F:
 
 			break;
+#pragma endregion 
+		#pragma region 0x40 - 0x4F
 		case 0x40:
-
+			LD_R1_R2(&B, B);
 			break;
 		case 0x41:
-
+			LD_R1_R2(&B, C);
 			break;
 		case 0x42:
-
+			LD_R1_R2(&B, D);
 			break;
 		case 0x43:
-
+			LD_R1_R2(&B, E);
 			break;
 		case 0x44:
-
+			LD_R1_R2(&B, H);
 			break;
 		case 0x45:
-
+			LD_R1_R2(&B, L);
 			break;
 		case 0x46:
-			LD_NN_N(&H, opcode >> 8);
+			LD_R1_R2(&B, HL);
 			break;
 		case 0x47:
-
+			LD_R1_R2(&B, *A);
 			break;
 		case 0x48:
-
+			LD_R1_R2(&C, B);
 			break;
 		case 0x49:
-
+			LD_R1_R2(&C, C);
 			break;
 		case 0x4A:
-
+			LD_R1_R2(&C, D);
 			break;
 		case 0x4B:
-
+			LD_R1_R2(&C, E);
 			break;
 		case 0x4C:
-
+			LD_R1_R2(&C, H);
 			break;
 		case 0x4D:
-
+			LD_R1_R2(&C, L);
 			break;
 		case 0x4E:
-			LD_NN_N(&L, opcode >> 8);
+			LD_R1_R2(&C, HL);
 			break;
 		case 0x4F:
-
+			LD_R1_R2(&C, *A);
 			break;
+#pragma endregion 
+		#pragma region 0x50 - 0x5F
 		case 0x50:
-
+			LD_R1_R2(&D, B);
 			break;
 		case 0x51:
-
+			LD_R1_R2(&D, C);
 			break;
 		case 0x52:
-
+			LD_R1_R2(&D, D);
 			break;
 		case 0x53:
-
+			LD_R1_R2(&D, E);
 			break;
 		case 0x54:
-
+			LD_R1_R2(&D, H);
 			break;
 		case 0x55:
-
+			LD_R1_R2(&D, L);
 			break;
 		case 0x56:
-			LD_NN_N(&H, opcode >> 8);
+			LD_R1_R2(&D, HL);
 			break;
 		case 0x57:
-
+			LD_R1_R2(&D, *A);
 			break;
 		case 0x58:
-
+			LD_R1_R2(&E, B);
 			break;
 		case 0x59:
-
+			LD_R1_R2(&E, C);
 			break;
 		case 0x5A:
-
+			LD_R1_R2(&E, D);
 			break;
 		case 0x5B:
-
+			LD_R1_R2(&E, E);
 			break;
 		case 0x5C:
-
+			LD_R1_R2(&E, H);
 			break;
 		case 0x5D:
-
+			LD_R1_R2(&E, L);
 			break;
 		case 0x5E:
-			LD_NN_N(&L, opcode >> 8);
+			LD_R1_R2(&E, HL);
 			break;
 		case 0x5F:
-
+			LD_R1_R2(&E, *A);
 			break;
+		#pragma endregion 
 		case 0x60:
 
 			break;
@@ -821,7 +827,7 @@ void CPU::LD_NN_N(short *r, short n)
 	*r = n; 
 }
 
-void CPU::LD_R1_R2(short *r1, short r2, short opcode)
+void CPU::LD_R1_R2(short *r1, short r2)
 {
 	*r1 = r2; 
 }

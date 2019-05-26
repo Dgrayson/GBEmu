@@ -28,7 +28,7 @@ private:
 
 	// 8bit loads
 	void LD_NN_N(short *r, short n); 
-	void LD_R1_R2(short *r1, short r2, short opcode);
+	void LD_R1_R2(short *r1, short r2);
 	void LD_A_N(short *n, short opcode);
 	void LD_N_A(short *r);
 	void LD_A_C();
