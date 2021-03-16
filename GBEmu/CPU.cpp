@@ -45,6 +45,7 @@ void CPU::decode()
 
 	switch(opcode)
 	{
+		// Unused OpCodes
 		case 0xD3:
 		case 0xDB:
 		case 0xDD: 
