@@ -16,6 +16,7 @@ public:
 	void execute();
 	void loadGame();
 	void init(); 
+	void processCBOpCode(); 
 
 private:
 	unsigned short stack[16];
@@ -88,22 +89,18 @@ private:
 	void EL();
 
 	//Rotates and shifts
-	void RLCA();
-	void RLA();
-	void RRCA();
-	void RRA();
-	void RLC();
-	void RL_N();
-	void RRC_N();
-	void RR_N();
-	void SLA_N();
-	void SRA_N();
-	void SRL_N();
+	void RLC_N(short *r);
+	void RL_N(short *r);
+	void RRC_N(short *r);
+	void RR_N(short *r);
+	void SLA_N(short *r);
+	void SRA_N(short *r);
+	void SRL_N(short *r);
 
 	//Bit Opcodes
-	void BIT_B_R(short b, short r);
-	void SET_B_R(short b, short r);
-	void RES_B_R(short b, short r);
+	void BIT_B_R(short b, short *r);
+	void SET_B_R(short b, short *r);
+	void RES_B_R(short b, short *r);
 
 	//Jumps
 	void JP_NN(short nn);
@@ -123,8 +120,6 @@ private:
 	void RET();
 	void RET_CC();
 	void RETI();
-
-
 };
 
 
