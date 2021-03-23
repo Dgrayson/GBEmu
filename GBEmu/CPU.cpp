@@ -831,125 +831,109 @@ void CPU::processCBOpCode()
 {
 	switch (opcode)
 	{
-		// Unused OpCodes
-	case 0xD3:
-	case 0xDB:
-	case 0xDD:
-	case 0xE3:
-	case 0xE4:
-	case 0xEB:
-	case 0xEC:
-	case 0xED:
-	case 0xF4:
-	case 0xFC:
-	case 0xFD:
-		std::cout << "Invalid opcode" << std::endl;
-		exit(3);
-		break;
-
 #pragma region 0x00 - 0x0F
 	case 0x00:
-		RLC_N(&B); 
+		RLC_N(&B);
 		break;
 	case 0x01:
-		RLC_N(&C); 
+		RLC_N(&C);
 		break;
 	case 0x02:
-		RLC_N(&D); 
+		RLC_N(&D);
 		break;
 	case 0x03:
-		RLC_N(&E); 
+		RLC_N(&E);
 		break;
 	case 0x04:
-		RLC_N(&H); 
+		RLC_N(&H);
 		break;
 	case 0x05:
-		RLC_N(&L); 
+		RLC_N(&L);
 		break;
 	case 0x06:
-		RLC_N(&HL); 
+		RLC_N(&HL);
 		break;
 	case 0x07:
-		RLC_N(&A); 
+		RLC_N(&A);
 		break;
 	case 0x08:
 		RRC_N(&B);
 		break;
 	case 0x09:
-		RRC_N(&C); 
+		RRC_N(&C);
 		break;
 	case 0x0A:
-		RRC_N(&D); 
+		RRC_N(&D);
 		break;
 	case 0x0B:
-		RRC_N(&E); 
+		RRC_N(&E);
 		break;
 	case 0x0C:
-		RRC_N(&H); 
+		RRC_N(&H);
 		break;
 	case 0x0D:
-		RRC_N(&L); 
+		RRC_N(&L);
 		break;
 	case 0x0E:
-		RRC_N(&HL); 
+		RRC_N(&HL);
 		break;
 	case 0x0F:
-		RRC_N(&A); 
+		RRC_N(&A);
 		break;
 #pragma endregion 
 #pragma region 0x10 - 0x1F
 	case 0x10:
-		RL_N(&B); 
+		RL_N(&B);
 		break;
 	case 0x11:
-		RL_N(&C); 
+		RL_N(&C);
 		break;
 	case 0x12:
-		RL_N(&D); 
+		RL_N(&D);
 		break;
 	case 0x13:
-		RL_N(&E); 
+		RL_N(&E);
 		break;
 	case 0x14:
-		RL_N(&H); 
+		RL_N(&H);
 		break;
 	case 0x15:
-		RL_N(&L); 
+		RL_N(&L);
 		break;
 	case 0x16:
-		RL_N(&HL); 
+		RL_N(&HL);
 		break;
 	case 0x17:
-		RL_N(&A); 
+		RL_N(&A);
 		break;
 	case 0x18:
-		RR_N(&B); 
+		RR_N(&B);
 		break;
 	case 0x19:
-		RR_N(&C); 
+		RR_N(&C);
 		break;
 	case 0x1A:
-		RR_N(&D); 
+		RR_N(&D);
 		break;
 	case 0x1B:
-		RR_N(&E); 
+		RR_N(&E);
 		break;
 	case 0x1C:
-		RR_N(&H); 
+		RR_N(&H);
 		break;
 	case 0x1D:
-		RR_N(&L); 
+		RR_N(&L);
 		break;
 	case 0x1E:
-		RR_N(&HL); 
+		RR_N(&HL);
 		break;
 	case 0x1F:
-		RR_N(&A); 
+		RR_N(&A);
 		break;
 #pragma endregion 
 #pragma region 0x20 - 0x2F
 	case 0x20:
-		SLA_N(&B); 
+		SLA_N(&B);
 		break;
 	case 0x21:
 		SLA_N(&C);
@@ -973,7 +957,7 @@ void CPU::processCBOpCode()
 		SLA_N(&A);
 		break;
 	case 0x28:
-		SRA_N(&B); 
+		SRA_N(&B);
 		break;
 	case 0x29:
 		SRA_N(&C);
@@ -999,7 +983,7 @@ void CPU::processCBOpCode()
 #pragma endregion 
 #pragma region 0x30 - 0x3F
 	case 0x30:
-		SWAP_N(&B); 
+		SWAP_N(&B);
 		break;
 	case 0x31:
 		SWAP_N(&C);
@@ -1023,7 +1007,7 @@ void CPU::processCBOpCode()
 		SWAP_N(&A);
 		break;
 	case 0x38:
-		SRL_N(&B); 
+		SRL_N(&B);
 		break;
 	case 0x39:
 		SRL_N(&C);
@@ -1049,7 +1033,7 @@ void CPU::processCBOpCode()
 #pragma endregion 
 #pragma region 0x40 - 0x4F
 	case 0x40:
-		BIT_B_R(0, &B); 
+		BIT_B_R(0, &B);
 		break;
 	case 0x41:
 		BIT_B_R(0, &C);
@@ -1099,7 +1083,7 @@ void CPU::processCBOpCode()
 #pragma endregion 
 #pragma region 0x50 - 0x5F
 	case 0x50:
-		BIT_B_R(2, &B); 
+		BIT_B_R(2, &B);
 		break;
 	case 0x51:
 		BIT_B_R(2, &C);
@@ -1149,7 +1133,7 @@ void CPU::processCBOpCode()
 #pragma endregion 
 #pragma region 0x60 - 0x6F
 	case 0x60:
-		BIT_B_R(4, &B); 
+		BIT_B_R(4, &B);
 		break;
 	case 0x61:
 		BIT_B_R(4, &C);
@@ -1197,7 +1181,7 @@ void CPU::processCBOpCode()
 		BIT_B_R(5, &A);
 		break;
 #pragma endregion 
-#pragma region 0x070 - 0x07F
+#pragma region 0x70 - 0x7F
 	case 0x70:
 		BIT_B_R(6, &B);
 		break;
@@ -1249,363 +1233,405 @@ void CPU::processCBOpCode()
 #pragma endregion 
 #pragma region 0x80 - 0x8f
 	case 0x80:
-		ADD_A_N(B);
+		RES_B_R(0, &B);
 		break;
 	case 0x81:
-		ADD_A_N(C);
+		RES_B_R(0, &C);
 		break;
 	case 0x82:
-		ADD_A_N(D);
+		RES_B_R(0, &D);
 		break;
 	case 0x83:
-		ADD_A_N(E);
+		RES_B_R(0, &E);
 		break;
 	case 0x84:
-		ADD_A_N(H);
+		RES_B_R(0, &H);
 		break;
 	case 0x85:
-		ADD_A_N(L);
+		RES_B_R(0, &L);
 		break;
 	case 0x86:
-		ADD_A_N(HL);
+		RES_B_R(0, &HL);
 		break;
 	case 0x87:
-		ADD_A_N(*A);
+		RES_B_R(0, &A);
 		break;
 	case 0x88:
-		ADC_A_N(B);
+		RES_B_R(1, &B);
 		break;
 	case 0x89:
-		ADC_A_N(C);
+		RES_B_R(1, &C);
 		break;
 	case 0x8A:
-		ADC_A_N(D);
+		RES_B_R(1, &D);
 		break;
 	case 0x8B:
-		ADC_A_N(E);
+		RES_B_R(1, &E);
 		break;
 	case 0x8C:
-		ADC_A_N(H);
+		RES_B_R(1, &H);
 		break;
 	case 0x8D:
-		ADC_A_N(L);
+		RES_B_R(1, &L);
 		break;
 	case 0x8E:
-		ADC_A_N(HL);
+		RES_B_R(1, &HL);
 		break;
 	case 0x8F:
-		ADC_A_N(*A);
+		RES_B_R(1, &A);
 		break;
 #pragma endregion 
 #pragma region 0x90 - 0x9F
 	case 0x90:
-		SUB_N(B);
+		RES_B_R(2, &B);
 		break;
 	case 0x91:
-		SUB_N(C);
+		RES_B_R(2, &C);
 		break;
 	case 0x92:
-		SUB_N(D);
+		RES_B_R(2, &D);
 		break;
 	case 0x93:
-		SUB_N(E);
+		RES_B_R(2, &E);
 		break;
 	case 0x94:
-		SUB_N(H);
+		RES_B_R(2, &H);
 		break;
 	case 0x95:
-		SUB_N(L);
+		RES_B_R(2, &L);
 		break;
 	case 0x96:
-		SUB_N(HL);
+		RES_B_R(2, &HL);
 		break;
 	case 0x97:
-		SUB_N(*A);
+		RES_B_R(2, &A);
 		break;
 	case 0x98:
-		SBC_A_N(B);
+		RES_B_R(3, &B);
 		break;
 	case 0x99:
-		SBC_A_N(C);
+		RES_B_R(3, &C);
 		break;
 	case 0x9A:
-		SBC_A_N(D);
+		RES_B_R(3, &D);
 		break;
 	case 0x9B:
-		SBC_A_N(E);
+		RES_B_R(3, &E);
 		break;
 	case 0x9C:
-		SBC_A_N(H);
+		RES_B_R(3, &H);
 		break;
 	case 0x9D:
-		SBC_A_N(L);
+		RES_B_R(3, &L);
 		break;
 	case 0x9E:
-		SBC_A_N(HL);
+		RES_B_R(3, &HL);
 		break;
 	case 0x9F:
-		SBC_A_N(*A);
+		RES_B_R(3, &A);
 		break;
 #pragma endregion 
 #pragma region 0xA0 - 0xAF
 	case 0xA0:
-		AND_N(B);
+		RES_B_R(4, &B);
 		break;
 	case 0xA1:
-		AND_N(C);
+		RES_B_R(4, &C);
 		break;
 	case 0xA2:
-		AND_N(D);
+		RES_B_R(4, &D);
 		break;
 	case 0xA3:
-		AND_N(E);
+		RES_B_R(4, &E);
 		break;
 	case 0xA4:
-		AND_N(H);
+		RES_B_R(4, &H);
 		break;
 	case 0xA5:
-		AND_N(L);
+		RES_B_R(4, &L);
 		break;
 	case 0xA6:
-		AND_N(HL);
+		RES_B_R(4, &HL);
 		break;
 	case 0xA7:
-		AND_N(*A);
+		RES_B_R(4, &A);
 		break;
 	case 0xA8:
-		XOR_N(B);
+		RES_B_R(5, &B);
 		break;
 	case 0xA9:
-		XOR_N(C);
+		RES_B_R(5, &C);
 		break;
 	case 0xAA:
-		XOR_N(D);
+		RES_B_R(5, &D);
 		break;
 	case 0xAB:
-		XOR_N(E);
+		RES_B_R(5, &E);
 		break;
 	case 0xAC:
-		XOR_N(H);
+		RES_B_R(5, &H);
 		break;
 	case 0xAD:
-		XOR_N(L);
+		RES_B_R(5, &L);
 		break;
 	case 0xAE:
-		XOR_N(HL);
+		RES_B_R(5, &HL);
 		break;
 	case 0xAF:
-		XOR_N(*A);
+		RES_B_R(5, &A);
 		break;
 #pragma endregion 
 #pragma region 0xB0 - 0xBF
 	case 0xB0:
-		OR_N(B);
+		RES_B_R(6, &B);
 		break;
 	case 0xB1:
-		OR_N(C);
+		RES_B_R(6, &C);
 		break;
 	case 0xB2:
-		OR_N(D);
+		RES_B_R(6, &D);
 		break;
 	case 0xB3:
-		OR_N(E);
+		RES_B_R(6, &E);
 		break;
 	case 0xB4:
-		OR_N(H);
+		RES_B_R(6, &H);
 		break;
 	case 0xB5:
-		OR_N(L);
+		RES_B_R(6, &L);
 		break;
 	case 0xB6:
-		OR_N(HL);
+		RES_B_R(6, &HL);
 		break;
 	case 0xB7:
-		OR_N(*A);
+		RES_B_R(6, &A);
 		break;
 	case 0xB8:
-		CP_N(B);
+		RES_B_R(7, &B);
 		break;
 	case 0xB9:
-		CP_N(C);
+		RES_B_R(7, &C);
 		break;
 	case 0xBA:
-		CP_N(D);
+		RES_B_R(7, &D);
 		break;
 	case 0xBB:
-		CP_N(E);
+		RES_B_R(7, &E);
 		break;
 	case 0xBC:
-		CP_N(H);
+		RES_B_R(7, &H);
 		break;
 	case 0xBD:
-		CP_N(L);
+		RES_B_R(7, &L);
 		break;
 	case 0xBE:
-		CP_N(HL);
+		RES_B_R(7, &HL);
 		break;
 	case 0xBF:
-		CP_N(*A);
+		RES_B_R(7, &A);
 		break;
 #pragma endregion 
+#pragma region 0xC0 - 0xCF
 	case 0xC0:
-		RET();
+		SET_B_R(0, &B);
 		break;
 	case 0xC1:
-		POP_NN(BC);
+		SET_B_R(0, &C);
 		break;
 	case 0xC2:
-		// TODO
+		SET_B_R(0, &D);
 		break;
 	case 0xC3:
-		JP_NN(opcode >> 8);
+		SET_B_R(0, &E);
 		break;
 	case 0xC4:
-
+		SET_B_R(0, &H);
 		break;
 	case 0xC5:
-		PUSH_NN(BC);
+		SET_B_R(0, &L);
 		break;
 	case 0xC6:
-		//LD_NN_N(&H, opcode >> 8);
+		SET_B_R(0, &HL);
 		break;
 	case 0xC7:
-
+		SET_B_R(0, &A);
 		break;
 	case 0xC8:
-
+		SET_B_R(1, &B);
 		break;
 	case 0xC9:
-
+		SET_B_R(1, &C);
 		break;
 	case 0xCA:
-
+		SET_B_R(1, &D);
 		break;
 	case 0xCB:
-
+		SET_B_R(1, &E);
 		break;
 	case 0xCC:
-
+		SET_B_R(1, &H);
 		break;
 	case 0xCD:
-
+		SET_B_R(1, &L);
 		break;
 	case 0xCE:
-		//LD_NN_N(&L, opcode >> 8);
+		SET_B_R(1, &HL);
 		break;
 	case 0xCF:
-
+		SET_B_R(1, &A);
 		break;
+#pragma endregion
+#pragma region 0xD0 - 0xDF
 	case 0xD0:
-
+		SET_B_R(2, &B);
 		break;
 	case 0xD1:
-
+		SET_B_R(2, &C);
 		break;
 	case 0xD2:
-
+		SET_B_R(2, &D);
+		break;
+	case 0xD3:
+		SET_B_R(2, &E);
 		break;
 	case 0xD4:
-
+		SET_B_R(2, &H);
 		break;
 	case 0xD5:
-
+		SET_B_R(2, &L);
 		break;
 	case 0xD6:
-		LD_NN_N(&H, opcode >> 8);
+		SET_B_R(2, &HL);
 		break;
 	case 0xD7:
-
+		SET_B_R(2, &A);
 		break;
 	case 0xD8:
-
+		SET_B_R(3, &B);
 		break;
 	case 0xD9:
-
+		SET_B_R(3, &C);
 		break;
 	case 0xDA:
-
+		SET_B_R(3, &D);
+		break;
+	case 0xDB:
+		SET_B_R(3, &E);
 		break;
 	case 0xDC:
-
+		SET_B_R(3, &H);
+		break;
+	case 0xDD:
+		SET_B_R(3, &L);
 		break;
 	case 0xDE:
-		LD_NN_N(&L, opcode >> 8);
+		SET_B_R(3, &HL);
 		break;
 	case 0xDF:
-
+		SET_B_R(3, &A);
 		break;
+#pragma endregion
+#pragma region 0xE0 - 0xEF
 	case 0xE0:
-
+		SET_B_R(4, &B);
 		break;
 	case 0xE1:
-
+		SET_B_R(4, &C);
 		break;
 	case 0xE2:
-
+		SET_B_R(4, &D);
+		break;
+	case 0xE3:
+		SET_B_R(4, &E);
+		break;
+	case 0xE4:
+		SET_B_R(4, &H);
 		break;
 	case 0xE5:
-
+		SET_B_R(4, &L);
 		break;
 	case 0xE6:
-		LD_NN_N(&H, opcode >> 8);
+		SET_B_R(4, &HL);
 		break;
 	case 0xE7:
-
+		SET_B_R(4, &A);
 		break;
 	case 0xE8:
-
+		SET_B_R(5, &B);
 		break;
 	case 0xE9:
-
+		SET_B_R(5, &C);
 		break;
 	case 0xEA:
-
+		SET_B_R(5, &D);
+		break;
+	case 0xEB:
+		SET_B_R(5, &E);
+		break;
+	case 0xEC:
+		SET_B_R(5, &H);
+		break;
+	case 0xED:
+		SET_B_R(5, &L);
 		break;
 	case 0xEE:
-		LD_NN_N(&L, opcode >> 8);
+		SET_B_R(5, &HL);
 		break;
 	case 0xEF:
-
+		SET_B_R(5, &A);
 		break;
+#pragma endregion
+#pragma region 0xF0 - 0xFF
 	case 0xF0:
-
+		SET_B_R(6, &B);
 		break;
 	case 0xF1:
-
+		SET_B_R(6, &C);
 		break;
 	case 0xF2:
-
+		SET_B_R(6, &D);
 		break;
 	case 0xF3:
-
+		SET_B_R(6, &E);
+		break;
+	case 0xF4:
+		SET_B_R(6, &H);
 		break;
 	case 0xF5:
-
+		SET_B_R(6, &L);
 		break;
 	case 0xF6:
-		LD_NN_N(&H, opcode >> 8);
+		SET_B_R(6, &HL);
 		break;
 	case 0xF7:
-
+		SET_B_R(6, &A);
 		break;
 	case 0xF8:
-
+		SET_B_R(7, &B);
 		break;
 	case 0xF9:
-
+		SET_B_R(7, &C);
 		break;
 	case 0xFA:
-
+		SET_B_R(7, &D);
 		break;
 	case 0xFB:
-
+		SET_B_R(7, &E);
+		break;
+	case 0xFC:
+		SET_B_R(7, &H);
+		break;
+	case 0xFD:
+		SET_B_R(7, &L);
 		break;
 	case 0xFE:
-		LD_NN_N(&L, opcode >> 8);
+		SET_B_R(7, &HL);
 		break;
 	case 0xFF:
-
+		SET_B_R(7, &A);
 		break;
+
+#pragma endregion
 	}
 }
 void CPU::setFlags(short Z, short N, short H, short C) {
